@@ -1,1 +1,1 @@
-# ML-lung-cancer-prediction
+# Machine Learning Lung Cancer Detection
