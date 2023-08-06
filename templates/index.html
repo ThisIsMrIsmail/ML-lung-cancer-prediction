@@ -1,186 +1,238 @@
-<html lang="en">  
- <head>  
-   <meta charset="UTF-8">  
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-   <meta http-equiv="X-UA-Compatible" content="ie=edge">  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lung Cancer Diagnose</title>
+  <link rel="stylesheet" href="/statics/style.css">
+</head>
 
+<body>
+    <div class="wrapper">
+      <div class="title">
+        <h1 style="color: white">Lung Cancer Diagnose</h1>
+      </div>
+      <div class="form">
+        <div class="input_field">
+          <h2 style="color: white">
+            Please filling form for diagnose Lung Cancer
+          </h2>
+        </div>
+      </div>
+    </div>
 
-   <title>Lung Cancer Diagnose</title>  
- </head>  
- <style>  
-   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');  
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+    <br>
+    <br>
 
-  }
-  body{
-    background: url("https://cdn.pixabay.com/photo/2016/08/10/20/26/stethoscope-1584223_1280.jpg") no-repeat top center;
-    padding: 0 10px;
-    background-size: cover;
-  }
-  .wrapper{
-    max-width: 800px;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    margin: 20px auto;
-    padding: 30px;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 1.25);
-  }
-  .wrapper .title{
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 25px;
-    color: #fec107;
-    text-transform: uppercase;
-    text-align: center;
-  }
-  .wrapper .form{
-    width: 100%;
-  }
-  .wrapper .form .input_field{
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-  }
-  .wrapper .form .input_field label{
-    width:200px;
-    font: bold;
-    color: wheat;
-    margin-right: 50px;
-    font-size: 14px;
-  }
-  .wrapper .form .input_field input{
-    width: 200px;
-  }
-  .wrapper .form .input_field .textarea{
-    resize: none;
-    height: 250px;
-    width: 750;
-  }
+    <form action="{{ url_for('predict')}}" method="post" class="form">
+      <div class="input_field">
+        <label>AGE</label>
+        <input
+          type="number"
+          id="age"
+          min="0"
+          max="150"
+          name="AGE"
+          class="input_text"
+          required
+        />
+        <br />
+        <i style="font-size: 17px; color: white">(Age: 1 - 150)</i>
+      </div>
+      <div class="input_field">
+        <label>GENDER</label>
+        <input
+          type="number"
+          min="0"
+          max="1"
+          name="GENDER"
+          class="input_text"
+          required
+        />
+        <br />
+        <i style="font-size: 16px; color: white">(Male: 1 & Female: 0)</i>
+      </div>
+      <div class="input_field">
+        <label>SMOKING</label>
+        <input
+          type="number"
+          min="1"
+          max="2"
+          name="SMOKING"
+          class="input_text"
+          required
+        />
+        <br />
+        <i style="font-size: 16px; color: white">(YES=2 , NO=1)</i>
+      </div>
+      <div class="input_field">
+        <label>YELLOW FINGERS </label>
+        <input
+          type="number"
+          name="YELLOW_FINGERS"
+          min="1"
+          max="2"
+          class="input_text"
+          required
+        />
+        <br />
+        <i style="font-size: 16px; color: white">(YES=2 , NO=1)</i>
+      </div>
 
-#submit {
-  background-color: wheat;
-  border: none;
-  color: black;
-  padding: 16px 32px;
-  text-decoration: none;
-  margin: 4px 2px;
-  cursor: pointer;
-  font-size:18px;
+      <div class="input_field">
+        <label>ANXIETY</label>
+        <input
+          name="ANXIETY"
+          type="number"
+          min="1"
+          max="2"
+          class="input_text"
+          required
+        />
+        <br />
+        <i style="font-size: 16px; color: white">(YES=2 , NO=1)</i>
+      </div>
+      <div class="input_field">
+        <label>PEER PRESSURE</label>
+        <input
+          type="number"
+          min="1"
+          max="2"
+          name="PEER_PRESSURE"
+          class="input_text"
+          required
+        />
+        <br />
+        <i style="font-size: 16px; color: white">(YES=2 , NO=1) </i>
+      </div>
+      <div class="input_field">
+        <label>CHRONIC DISEASE</label>
+        <input
+          type="number"
+          name="CHRONIC_DISEASE"
+          min="1"
+          max="2"
+          class="input_text"
+          required
+        />
+        <br />
+        <i style="font-size: 16px; color: white">(YES=2 , NO=1)</i>
+      </div>
+      <div class="input_field">
+        <label>FATIGUE</label>
+        <input
+          name="FATIGUE"
+          type="number"
+          min="1"
+          max="2"
+          class="input_text"
+          required
+        />
+        <br />
+        <i style="font-size: 16px; color: white">(YES=2 , NO=1)</i>
+      </div>
+      <div class="input_field">
+        <label>ALLERGY</label>
+        <input
+          type="number"
+          min="1"
+          max="2"
+          name="ALLERGY"
+          class="input_text"
+          required
+        />
+        <br />
+        <i style="font-size: 16px; color: white">(YES=2 , NO=1)</i>
+      </div>
+      <div class="input_field">
+        <label>WHEEZING</label>
+        <input
+          name="WHEEZING"
+          id="oldpeak"
+          type="number"
+          min="1"
+          max="2"
+          class="input_text"
+          required
+        />
+        <br />
+        <i style="font-size: 16px; color: white">((YES=2 , NO=1)</i>
+      </div>
+      <div class="input_field">
+        <label>ALCOHOL CONSUMING</label>
+        <input
+          type="number"
+          min="1"
+          max="2"
+          name="ALCOHOL_CONSUMING"
+          class="input_text"
+          required
+        />
+        <br />
+        <i style="font-size: 16px; color: white">(YES=2 , NO=1) </i>
+      </div>
+      <div class="input_field">
+        <label>COUGHING</label>
+        <input
+          type="number"
+          name="COUGHING"
+          min="1"
+          max="2"
+          class="input_text"
+          required
+        />
+        <br />
+        <i style="font-size: 16px; color: white">(YES=2 , NO=1)</i>
+      </div>
+      <div class="input_field">
+        <label>SHORTNESS OF BREATH</label>
+        <input
+          type="number"
+          name="SHORTNESS_OF_BREATH"
+          min="1"
+          max="2"
+          class="input_text"
+          required
+        />
+        <br />
+        <i style="font-size: 16px; color: white">(YES=2 , NO=1)</i>
+      </div>
 
-}
- </style>  
- <body>  
+      <div class="input_field">
+        <label>SWALLOWING DIFFICULTY</label>
+        <input
+          type="number"
+          name="SWALLOWING_DIFFICULTY"
+          min="1"
+          max="2"
+          class="input_text"
+          required
+        />
+        <br />
+        <i style="font-size: 16px; color: white">(YES=2 , NO=1)</i>
+      </div>
 
-   <div class="wrapper">  
-     <div class="title">  
-       <h1 style="color: white;">Lung Cancer Diagnose</h1>  
-     </div>  
-	    <div class="form">  
-		
-		  <div class="input_field">  
-        <h2 style="color:white"> Please filling form for diagnose Lung Cancer<h2>
-        </div> 
-<br>
-<br>
-
-		<form action="{{ url_for('predict')}}" method="post" class="form">
-       <div class="input_field">  
-         <label>AGE</label>  
-         <input type="number" id="age" min="0" max="150" name="AGE" class="input_text" required>  
-         <br/>  <i style="font-size: 17px; color: white;">(Age: 1 - 150)</i>  
-       </div>  
-       <div class="input_field">  
-         <label>GENDER</label>  
-          <input type="number" min="0" max="1" name="GENDER"  class="input_text" required>  
-          <br/>  <i style="font-size: 16px; color: white;">(Male: 1 & Female: 0)</i>  
-        </div>  
-		<div class="input_field">  
-         <label>SMOKING</label>  
-          <input type="number" min="1" max="2" name="SMOKING"  class="input_text" required>  
-          <br/>  <i style="font-size: 16px; color: white;">(YES=2 , NO=1)</i>  
-        </div>  
-        <div class="input_field">  
-         <label>YELLOW FINGERS 	</label>  
-          <input type="number" name="YELLOW_FINGERS"  min="1" max="2" class="input_text" required>  
-          <br/>  <i style="font-size: 16px; color: white;">(YES=2 , NO=1)</i>  
-        </div>  
-        
-        <div class="input_field">  
-         <label>ANXIETY</label>  
-          <input name="ANXIETY" type="number" min="1" max="2" class="input_text" required>  
-          <br/>  <i style="font-size: 16px; color: white;">(YES=2 , NO=1)</i>  
-        </div>  
-        <div class="input_field">  
-         <label>PEER PRESSURE</label>  
-          <input type="number" min="1" max="2" name="PEER_PRESSURE" class="input_text" required>  
-          <br/>  <i style="font-size: 16px; color: white;">(YES=2 , NO=1) </i>  
-        </div>  
-        <div class="input_field">  
-         <label>CHRONIC DISEASE</label>  
-          <input type="number" name="CHRONIC_DISEASE" min="1" max="2"  class="input_text" required>  
-          <br/>  <i style="font-size: 16px; color: white;">(YES=2 , NO=1)</i>  
-        </div>  
-        <div class="input_field">  
-         <label>FATIGUE</label>  
-          <input name="FATIGUE"  type="number" min="1" max="2" class="input_text" required>  
-          <br/>  <i style="font-size: 16px; color: white;">(YES=2 , NO=1)</i>  
-        </div>  
-        <div class="input_field">  
-         <label>ALLERGY</label>  
-          <input type="number" min="1" max="2" name="ALLERGY"  class="input_text" required>  
-          <br/>  <i style="font-size: 16px; color: white;">(YES=2 , NO=1)</i>  
-        </div>  
-        <div class="input_field">  
-         <label>WHEEZING</label>  
-          <input name="WHEEZING" id="oldpeak" type="number" min="1" max="2" class="input_text" required>  
-          <br/>  <i style="font-size: 16px; color: white;">((YES=2 , NO=1)</i>  
-        </div>  
-        <div class="input_field">  
-         <label>ALCOHOL CONSUMING</label>  
-          <input type="number" min="1" max="2" name="ALCOHOL_CONSUMING" class="input_text" required>  
-          <br/>  <i style="font-size: 16px; color: white;">(YES=2 , NO=1) </i>  
-        </div>  
-        <div class="input_field">  
-         <label>COUGHING</label>  
-          <input type="number" name="COUGHING" min="1" max="2"  class="input_text" required>  
-          <br/>  <i style="font-size: 16px; color: white;">(YES=2 , NO=1)</i>  
-        </div>  
-        <div class="input_field">  
-         <label>SHORTNESS OF BREATH</label>  
-          <input type="number" name="SHORTNESS_OF_BREATH" min="1" max="2"  class="input_text" required>  
-          <br>  <i style="font-size: 16px; color: white;">(YES=2 , NO=1)</i>  
-        </div> 
-
- <div class="input_field">  
-         <label>SWALLOWING DIFFICULTY</label>  
-          <input type="number" name="SWALLOWING_DIFFICULTY" min="1" max="2" class="input_text" required>  
-          <br>  <i style="font-size: 16px; color: white;">(YES=2 , NO=1)</i>  
-        </div> 
-
- <div class="input_field">  
-         <label>CHEST PAIN</label>  
-          <input type="number" name="CHEST_PAIN" min="1" max="2"  class="input_text" required>  
-          <br>  <i style="font-size: 16px; color: white;">(YES=2 , NO=1)</i>  
-        </div> 		
-        <div class="input_field">  
-        <button type="submit" id="submit">Predict</button> 
-       </div> 
-
-
-    </form>	   
-       <div>  
-         <center>  
-		 
-		 <p style="font-size: 20px; color: white;"> {{ prediction_text }} </p>
-      
-         </center>  
-       </div>  
-     </div>  
-   </div>  
-
- </body>  
- </html>  
+      <div class="input_field">
+        <label>CHEST PAIN</label>
+        <input
+          type="number"
+          name="CHEST_PAIN"
+          min="1"
+          max="2"
+          class="input_text"
+          required
+        />
+        <br />
+        <i style="font-size: 16px; color: white">(YES=2 , NO=1)</i>
+      </div>
+      <div class="input_field">
+        <button type="submit" id="submit">Predict</button>
+      </div>
+    </form>
+    <div>
+      <center>
+        <p style="font-size: 20px; color: white">{{ prediction_text }}</p>
+      </center>
+    </div>
+  </body>
+</html>

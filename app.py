@@ -1,30 +1,30 @@
 import joblib
 import numpy as np
-from flask import Flask, request, render_template
+import flask as flask
 
-# Create flask app
-flask_app = Flask(__name__)
-model = joblib.load('RF.pkl', 'rb')
-
-
-@flask_app.route("/")
-def Home():
-    return render_template("index.html")
+app = flask.Flask(__name__)
+model = joblib.load('model.pkl', 'rb')
 
 
-@flask_app.route("/predict", methods=["POST"])
+@app.route("/")
+def home():
+    return flask.render_template("index.html")
+
+
+@app.route("/predict", methods=["POST"])
 def predict():
-    float_features = [float(x) for x in request.form.values()]
+    float_features = [float(x) for x in flask.request.form.values()]
     features = [np.array(float_features)]
     prediction = model.predict(features)
+    
     if prediction == 1:
-        result = "The person has lung cancer disease"
+        result = "Suspicion to have the Disease"
     elif prediction == 0:
-        result = "The person does not has lung cancer disease"
+        result = "Normal Person"
     else:
-        result = "Error"
-    return render_template("index.html", prediction_text="{}".format(result))
+        result = "Error! try again"
+    return flask.render_template("index.html", prediction_text="{}".format(result))
 
 
 if __name__ == "__main__":
-    flask_app.run(debug=True)
+    app.run(host='0.0.0.0')
